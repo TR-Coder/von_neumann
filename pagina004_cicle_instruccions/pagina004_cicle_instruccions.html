@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="ca">
+
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Document</title>
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300&family=Oswald&display=swap" rel="stylesheet">
+	<link rel="stylesheet" href="../estils/reset.css">
+	<link rel="stylesheet" href="../estils/estils.css">
+</head>
+
+<body>
+
+	<h2>El cicle d'instruccions</h2>
+
+	<p>
+		Els programes estan formats per una seqüència d'instruccions que estan en memòria principal mentre estan en execució
+		i la unitat funcional encarregada de l’execució de cadascuna d’estes instruccions és la CPU.
+	</p>
+	<p>
+		Una CPU mai està parada, sempre esta fent el que s’anomena el <i>cicle d’instruccions</i> que repetirà contínuament mentre estiga en marxa.
+	</p>
+
+	<figure>
+		<img src="imatges/Cicle_intruccions.svg" />
+	</figure>
+
+	<p>
+		El cicle d’instruccions són els passos que realitza la CPU per a executar cada instrucció i està formada per 3 fases:
+	</p>
+
+	<ul class="margin-top-low">
+		<li>
+			<strong>FASE DE BUSCA</strong><br>
+			En esta fase, la CPU (en concret la UC) sol·licita a la memòria que li envie una nova instrucció del programa.
+			Tant la sol·licitud com la instrucció que la memòria envia a la CPU es transmeten pel bus del sistema.
+		</li>
+		<br>
+		<li>
+			<strong>FASE DE DESCODIFICACIÓ</strong><br>
+			Una vegada la instrucció ha arribat a la CPU, la UC mira de quin tipus d'instrucció es tracta i decideix quins són els
+			passos a seguir.
+		</li>
+		<br>
+		<li>
+			<strong>FASE D'EXECUCIÓ</strong><br>
+			La UC genera la seqüència de senyals de control pròpia d'eixa instrucció i les fa arribar a les diferents parts de
+			la CPU (registres, ALU etc.) i de l'ordinador.
+		</li>
+	</ul>
+
+	<p>
+		Una vegada conclosa la fase d'execució este cicle comença de nou amb la fase de busca de la següent instrucció del programa.
+	</p>
+	<p>
+		Més endavant vorem més en detall cadascuna de la fases.
+	</p>
+
+
+</body>
+
+</html>

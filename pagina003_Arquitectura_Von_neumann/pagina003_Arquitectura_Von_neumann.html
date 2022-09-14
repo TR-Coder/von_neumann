@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="ca">
+
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Document</title>
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300&family=Oswald&display=swap" rel="stylesheet">
+	<link rel="stylesheet" href="../estils/reset.css">
+	<link rel="stylesheet" href="../estils/estils.css">
+</head>
+
+<body>
+
+	<h2>Arquitectura de Von Neumann</h2>
+
+	<p>
+		La majoria d’ordinadors actuals utilitzen la mateixa estructura.
+		Encara que és una estructura, tradicionalment se la coneix com a <i>Arquitectura de Von Neumann</i>.
+	</p>
+
+	<figure>
+		<img src="imatges/Foto_Von_Neumann.png" />
+	</figure>
+
+	<p>
+		Els ordinadors són capaços de resoldre diferents tipus de problemes.
+		Cada problema es resol amb un programa escrit específicament per a resoldre eixe problema.
+	</p>
+	<p>
+		Els programes estan formats per instruccions les quals estan convenient col·locades pels programadors perquè
+		seguisquen uns passos amb una lògica que concloga en la resolució del problema.
+	</p>
+	<p>
+		Les instruccions que formen un programa s’executen de manera seqüencial, després d’executar-se una instrucció
+		s’executa la següent (com vorem esta seqüencia es pot trencar).
+	</p>
+	<p>
+		Les instruccions dels programes i les dades que estos utilitzen estan en tots junts en la memòria.
+	</p>
+
+	<p>
+		En l’arquitectura de Von Neumann l’ordinador s’estructura en les següents unitats funcionals:
+		CPU, memòria principal, unitats d’entrada i eixida, i bus d’interconnexió
+	</p>
+
+	<figure>
+		<img src="imatges/Esquema Von Neumann.svg" />
+	</figure>
+
+	<p>Estes unitats funcionals realitzen les següents tasques:</p>
+
+	<ul>
+		<li>
+			<strong>MEMÒRIA PRINCIPAL</strong><br>
+			Emmagatzema les dades i les instruccions que componen els programes.
+			És vista pel processador com un conjunt de cel·les numerades on pot llegir i escriure informació.
+		</li>
+
+
+		<li>
+			<strong>LA UNITAT CENTRAL DE PROCÉS (CPU, Central Process Unit)</strong><br>
+			És l'encarregada d'executar les operacions que indiquen les instruccions dels programes i controlar la resta
+			de l'ordinador perquè es complisquen estes instruccions. Els seus components més importants són:
+
+			<ul>
+				<li>
+					<strong>La Unitat de Control</strong> (Unit Control, UC)<br>
+					S'encarrega d'interpretar les instruccions i emetre els senyals de control
+					apropiats per a executar-les.
+				</li>
+				<li>
+					<strong>La Unitat Lògic Aritmètica</strong> (Arithmetic Logic Unit, ALU)<br>
+					Realitza les operacions matemàtiques i lògiques elementals: Suma, resta, multiplicació, divisió, AND, OR, XOR, NOT, etc.
+				</li>
+			</ul>
+		</li>
+
+
+		<li>
+			<strong>ELS DISPOSITIUS D'ENTRADA I EIXIDA (E/E)</strong><br>
+			Proporcionen a l'ordinador la comunicació amb l'exterior i la capacitat d'emmagatzematge permanent d'informació.
+			Exemple: El teclat, un disc dur, la impressora...
+		</li>
+
+		<li>
+			<strong>EL BUS D'INTERCONNEXIÓ DEL SISTEMA</strong><br>
+			Són les connexions elèctriques que interconnecten els diferents components de l'ordinador i permet la comunicació
+			entre ells.
+		</li>
+	</ul>
+
+
+
+
+
+
+
+
+
+
+
+</body>
+
+</html>

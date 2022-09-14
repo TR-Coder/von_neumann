@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="ca">
+
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Document</title>
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300&family=Oswald&display=swap" rel="stylesheet">
+	<link rel="stylesheet" href="../estils/reset.css">
+	<link rel="stylesheet" href="../estils/estils.css">
+</head>
+
+<body>
+
+	<h2>Estructura interna de la CPU</h2>
+
+	<p>
+		Per facilitat pedagògica, ens inventarem un processador simplificat amb un conjunt d’instruccions també simplificat
+		que ens permetrà comprendre com funcionen els processadors i respondre a la pregunta de què és un programa.
+	</p>
+
+	<h3>El processador o CPU</h3>
+	<p>
+		La <i>CPU</i>, Central Process Unit, o també coneguda com a <i>processador</i>, és la unitat funcional de l'ordinador encarregada d'executar
+		les instruccions que componen els programes.
+	</p>
+	<p>
+		Antigament la CPU estava formada per diversos circuits digitals que, amb les millores tecnològiques,
+		s’han pogut integrar en un sol xip anomenat <i>microprocessador</i>.
+	</p>
+	<p>
+		La següent figura mostra l’esquema intern de la CPU que estudiarem i com es connecta a la memòria i als dispositius
+		d’entrada i eixida, a través dels busos del sistema.
+	</p>
+
+	<figure>
+		<img src="imatges/CPU.svg" />
+	</figure>
+
+	<h3>La unitat de control</h3>
+	<p>
+		La Unitat de control és el cervell de l’ordinador.
+	</p>
+	<p>
+		La UC és l’encarregada de demanar les instruccions a la memòria principal, de descodificar-les i d’executar-les.
+		Descodificar és desglossar les parts en què està formada un instrucció i a partir d'ací generar, en cada cas, la
+		seqüència de senyals de control necessàries per moure i coordinar el moviment de les paraules entre les diferents
+		parts de la CPU.
+	</p>
+	<p>
+		També controla la resta de components de la CPU, i damunt és l’encarregada de llegir i d’escriure paraules en la memòria
+		principal i en els dispositius d’entrada i eixida segons ho dicten les instruccions.
+	</p>
+
+	<p>
+		Les línies que porten els senyals de control ixen de la UC i arriben fins els registres, l'ALU i el bus dels sistema.
+		En l’esquema no estan dibuixades per simplicitat i netedat.
+	</p>
+
+	<h3>El rellotge</h3>
+	<p>
+		La CPU funciona d'una manera sincronitzada seguint la velocitat marcada pels polsos d’un senyal en forma d’ona quadrada que
+		li transmet un rellotge.
+		Estos polsos segueixen un ritme constant anomenats cicles.
+		Els cicles es mesuren en Hertz (cicles per segon).
+	</p>
+	<p>
+		Per a executar una instrucció són necessaris un o més cicles de rellotge, depenent del tipus d’instrucció i dels operands que
+		continga.
+	</p>
+	<p>
+		Les prestacions d’un processador no estan només determinades pels GHz de la freqüència de rellotge, sinó també per altres
+		característiques, com el disseny del joc d’instruccions i la capacitat d’executar simultàniament múltiples instruccions.
+	</p>
+
+	<h3>Els registres</h3>
+	<p>
+		El registres són la memòria interna de la CPU i s'utilitzen per emmagatzemar temporalment les dades amb què està operant en
+		un moment donat. Tenim:
+	</p>
+	<h4>Registres de propòsit general</h4>
+	<P>
+		Són utilitzats pels programes per a emmagatzemar informació en general, ja siguen adreces de memòria o dades.
+		Nosaltres els designarem com a R1, R2, R3, etc.
+	</P>
+
+	<h4>Registres de propòsit específic</h4>
+	<p>
+		Són utilitzats per a controlar el funcionament propi de la CPU.
+		Els registres més comuns d'este tipus són:
+	</p>
+
+
+	<ul>
+		<li>
+			<h5>El registre PC (comptador del programa)</h5>
+			<p>
+				És un registre que emmagatzema l'adreça de memòria de la següent instrucció que s'ha de llegir de la RAM.
+				En la majoria de CPU cada vegada que es llig una instrucció des de la memòria el PC s'incrementa en 1 de manera automàtica.
+				Com vorem, existixen instruccions que permeten canviar el valor del PC i que servixen per a modificar el flux del programa.
+			</p>
+		</li>
+		<li>
+			<h5> El Registre IR (registre d'instruccions)</h5>
+			<p>
+				Emmagatzema la instrucció que la UC està executant en eixos moments.
+			</p>
+		</li>
+		<li>
+			<h5>El Registre MAR (registre d'adreces de memòria)</h5>
+			<p>
+				Conté l'adreça de la posició de memòria a la qual vol accedir la CPU.
+				El seu contingut es transmet pel bus d'adreces quan s’efectua una operació de lectura o escriptura.
+			</p>
+		</li>
+		<li>
+			<h5>El Registre MDR (registre de dades de memòria)</h5>
+			<p>
+				Emmagatzema la dada transferida cap a o des de la memòria principal.
+			</p>
+		</li>
+		<li>
+			<h5>El Registre d'estat)</h5>
+			<p>
+				És un conjunt de bits on cadascun d'ells indica l'estat de l'última operació realitzada per l'ALU.
+			</p>
+		</li>
+		<li>
+			<h5>El Registre A (registre acumulador)</h5>
+			<p>
+				El l'origen de les operacions que efectua l'ALU i la destinació del resultat que generen la majoria
+				d'instruccions que fan operacion matemàtiques i lògiques.
+			</p>
+		</li>
+	</ul>
+
+
+	<h4>Bus intern</h4>
+	<p>
+		Els registres de la CPU estan interconnectats entre ells a través d'un bus intern propi amb una funció similar a la del
+		bus del sistema, la de permetre el moviment de paraules d’un lloc a un altre.
+	</p>
+
+
+
+	<h4>La unitat lògic aritmètica (ALU)</h4>
+
+	<p>
+		La unitat lògic aritmètica (ALU) és un circuit digital que realitza dos tipus d’operacions:
+	</p>
+	<ul>
+		<li>
+			Aritmètiques: suma, resta, multiplicació i divisió.
+		</li>
+		<li>
+			Lògiques: and, or, not i xor.
+		</li>
+	</ul>
+
+	<p>
+		L’operació que ha de fer li l’ordena la UC a través de senyals de control segons la instrucció que està executant.
+	</p>
+
+	<p>
+		L’ALU té dos entrades i una eixida:
+		L’entrada són els nombres sobre els quals operar i l’eixida és el resultat de l’operació.
+	</p>
+
+	<p>
+		De les dos entrades de dades, una està connectada al bus intern de la CPU i l’altra al registre acumulador
+	</p>
+
+	<figure>
+		<img src="imatges/ALU.svg" />
+	</figure>
+
+	<p>
+		Les operacions de l’ALU sempre implica dos nombres, un és el que està el registre Acumulador,
+		l’altre és algun dels altres registres de la CPU (R1, R2..., MDR) que es trasllada a l’ALU via el bus intern.
+		Això ho fa la UC a través dels senyals de control segons la instrucció.
+	</p>
+
+	<p>
+		Segons la instrucció, el resultat de l’operació es bolcarà de nou en l’acumulador o es bolcarà en el bus per acabar
+		en algun dels registres interns.
+		En tots dos casos, se sobreescriurà el valor que tenia el registre prèviament amb el nou valor que ve l’ALU.
+	</p>
+
+
+
+	<h4>El registre d'estat</h4>
+
+	<p>
+		Associat a l’ALU existix un registre especial anomenat registre d’estat que servix per a anotar com ha sigut l`última
+		operació que ha fet.
+	</p>
+	<p>
+		Sempre que l’ALU fa alguna operació es modifiquen el bits d'este registre.
+	</p>
+
+	<figure>
+		<img src="imatges/Registre_estat.svg" />
+	</figure>
+
+	<p>
+		Cadascun del bits del registre d’estat té un significat propi que, segon el seu valor (0 o 1), indica alguna característica
+		de l’última operació efectuada per l’ALU.
+		Com es habitual treballar sobre estos bits tenen un nom.
+	</p>
+
+	<p>
+		Ens centrarem només en dos d’estos bits:
+	</p>
+	<ul>
+		<li>
+			Z (Bit de zero)<br>
+			Es posa a '1' quan el resultat de l'última operació ha sigut zero.<br>
+			Es posa a '0' quan ha sigut diferent a zero.
+		</li>
+		<li>
+			S (Bit de signe)<br>
+			Es posa a '1' quan el resultat de l'última operació ha sigut negatiu.<br>
+			Es posa a '0' si ha sigut positiu.
+		</li>
+	</ul>
+
+	<p>
+		Com vorem, estos bits són de summa importància quan s’executa un programa ja que permeten saber si dos nombres són iguals,
+		diferents o quin és major o menor que l’altre i, en funció d’això, decidir si executar unes instruccions o unes altres.
+	</p>
+
+
+
+
+
+
+
+
+
+
+
+
+</body>
+
+</html>

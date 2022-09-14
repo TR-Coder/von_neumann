@@ -1,0 +1,172 @@
+body {
+	min-height: 100vh;
+	max-width: 1080px;
+	background-color: white;
+	margin: 0 .5rem
+}
+
+h1 {
+	font-family: 'Oswald', sans-serif;
+	font-size: 2rem;
+	margin: 1rem;
+	text-align: center;
+}
+
+h2 {
+	font-family: 'Oswald', sans-serif;
+	font-size: 1.5rem;
+	margin-top: 1rem;
+	margin-bottom: 1rem;
+}
+
+h3 {
+	font-family: 'Oswald', sans-serif;
+	font-size: 1.5rem;
+	margin-bottom: .5rem;
+}
+
+h4 {
+	font-family: 'Oswald', sans-serif;
+	font-size: 1.3rem;
+	margin-bottom: 0;
+}
+
+h5 {
+	font-family: 'Oswald', sans-serif;
+	font-size: 1rem;
+	text-decoration: underline;
+	margin-bottom: 0;
+}
+
+
+p,
+ul,
+ol,
+a {
+	font-family: 'Open Sans', sans-serif;
+	font-size: 1.3rem;
+}
+
+a {
+	text-decoration: none;
+}
+
+
+p {
+	margin-top: 0;
+	margin-bottom: 1rem;
+}
+
+figure {
+	display: flex;
+	justify-content: center;
+	margin-bottom: 2rem;
+}
+
+img {
+	text-align: center;
+}
+
+ol,
+ul,
+menu {
+	list-style: disc;
+	margin-left: 1rem;
+	margin-bottom: 1rem;
+}
+
+ul ul {
+	list-style: circle;
+	margin-left: 1rem;
+}
+
+li {
+	margin-left: 1rem;
+	margin-bottom: .5rem;
+}
+
+strong {
+	font-weight: bold;
+}
+
+i {
+	font-style: italic;
+}
+
+
+figure,
+img {
+	max-width: 100%;
+}
+
+.marginBottomZero {
+	margin-bottom: 0;
+}
+
+
+
+
+
+/* https://getbootstrap.com/docs/5.0/layout/breakpoints/ */
+
+/* Small devices (landscape phones, 576px and up) */
+@media (min-width: 576px) {
+
+	body {
+		margin: 0 auto;
+	}
+
+	h1 {
+		font-size: 4rem;
+	}
+
+	h2 {
+		font-size: 3rem;
+	}
+
+	h3 {
+		font-size: 1.7rem;
+	}
+
+	h4 {
+		font-size: 1.3rem;
+	}
+
+	h5 {
+		font-size: 1.1rem;
+	}
+
+
+
+	ol,
+	ul,
+	menu {
+		list-style: disc;
+		margin-left: 4rem;
+	}
+
+	ul ul {
+		list-style: circle;
+		margin-left: 6rem;
+	}
+
+	.marge_esquerre {
+		margin-left: 25%;
+	}
+}
+
+/* Medium devices (tablets, 768px and up) */
+@media (min-width: 768px) {
+	body {
+		margin: 0 auto;
+	}
+}
+
+/* Large devices (desktops, 992px and up) */
+@media (min-width: 992px) {}
+
+/* X-Large devices (large desktops, 1200px and up) */
+@media (min-width: 1200px) {}
+
+/* XX-Large devices (larger desktops, 1400px and up) */
+@media (min-width: 1400px) {}

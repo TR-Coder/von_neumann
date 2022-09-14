@@ -1,0 +1,698 @@
+<!DOCTYPE html>
+<html lang="ca">
+
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Document</title>
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300&family=Oswald&display=swap" rel="stylesheet">
+	<link rel="stylesheet" href="../estils/reset.css">
+	<link rel="stylesheet" href="../estils/estils.css">
+</head>
+
+<body>
+
+	<h2>Conjunt d'instruccions</h2>
+
+	<h3>Llenguatge màquina i ensamblador</h3>
+
+	<p>
+		Com hem estudiat, el processador viu en un bucle infinit, el cicle d’instruccions, en què executa les instruccions dels
+		programes seqüencialment durant tot el temps en què està en marxa.
+	</p>
+	<p>
+		Cadascuna de les instruccions està codificada com una paraula, com un grup de bits que la Unitat de Control sap interpretar.
+		S’anomena <i>conjunt d’instruccions</i>, el conjunt de totes les instruccions que una CPU és capaç d’executar.
+		Este conjunt d’instruccions són el llenguatge que entén l'ordinador, se’l coneix com a <i>llenguatge màquina</i> o
+		<i>codi màquina</i>, i és específic de cada processador.
+	</p>
+	<p>
+		Si mirem com és un programa en codi màquina vorem que és una seqüencia interminable d’1 i 0.
+		Encara que és el llenguatge natural per a la CPU, per a nosaltres resulta molt difícil d’entendre i de programar.
+	</p>
+
+	<figure>
+		<img src="imatges/Llenguatge màquina.png" />
+	</figure>
+	<p>
+		Realment, només els primers ordinadors es programaven en binari.
+		Però com era un procés lent, inexpressiu i propens a errors, es va passar a substituir els 0 i 1 de les instruccions màquina
+		per un altre llenguatge, el <i>llenguatge ensamblador</i>, o simplement <i>ensamblador</i>.
+	</p>
+
+
+	<p>
+		A cada instrucció en ensamblador li correspon una en codi màquina.
+		En ensamblador, les instruccions màquina s’expressen amb una paraula, anomenada un mnemònic, com per exemple MOVE, ADD o JUMP,
+		que expressen d’una manera més comprensible el que fa cada instrucció.
+	</p>
+
+	<figure>
+		<img src="imatges/Codi_maquina_vs_ensamblador.png" />
+	</figure>
+
+	<p>
+		L’ensamblador, es coneix com a llenguatge de baix nivell, volent indicar que té una traducció directa al codi màquina.
+		Actualment pocs programes es fan en ensamblador ja que, encara que és més fàcil d’entendre que el binari pur, continua
+		generant programes llargs, difícils de depurar i de comprendre.
+	</p>
+	<p>
+		La major part dels llenguatges actuals es programen en els anomenats <i>llenguatges d’alt nivell</i>.
+		En ells, ens oblidem del maquinari i ens centrem en el que el programa ha de fer.
+		Les instruccions dels llenguatges d’alt nivell són més expressives, són més fàcils de combinar i d’entendre.
+	</p>
+
+	<figure>
+		<img src="imatges/Llenguatges_alt_baix_nivell.svg" />
+	</figure>
+
+	<p>
+		Però no hem d'oblidar que, independentment del llenguatge d'alt nivell que utilitzem, al final de tot, el que el processador executa són les instruccions
+		màquina i, a l’igual que l’ensamblador es traduïx directament a codi màquina, cada una de les instruccions d’alt nivell
+		s’han de traduir en moltes instruccions màquina.
+		La tasca de traducció d’un llenguatge d’alt nivell a un llenguatge de baix nivell la fan uns programes anomenats <i>compiladors</i>.
+	</p>
+
+
+	<h3>Format de les instruccions</h3>
+
+	<p>
+		Com hem vist, una instrucció està formada per una seqüencia de bits.
+		En realitat, esta seqüència està subdividida en una sèrie de parts, o camps, amb un significat propi.
+	</p>
+
+	<p>
+		Un comentari abans de seguir. Les instruccions sempre treballem sobre dades en forma de bits, bytes o paraules.
+		Si diem que una instrucció suma, el que suma són dades, i si diem que mou, el que mou són dades.
+		En realitat, no hi ha res més.
+	</p>
+
+	<p>
+		Bàsicament existixen dos tipus de camps:
+	<ul>
+		<li>
+			<i>Codi d'operació: </i>
+			Indica que fa la instrucció, com sumar, moure, comparar, etc.
+		</li>
+		<li>
+			<i>Operand: </i>
+			Indica a qui afecta el codi d'operació. Què se suma, què es mou, què es compara, etc.
+			L’operand pot ser un registre, una adreça de memòria o un nombre.
+		</li>
+	</ul>
+	</p>
+
+	<p>
+		Podem classificar les instruccions atenent al nombre d'operands:
+	</p>
+
+	<figure>
+		<img src="imatges/Format_instruccio.png" />
+	</figure>
+
+	<p>
+		Un exemple d'instrucció d'un operand és <i>JUMP R1</i>.
+	</p>
+	<p>
+		En ella, JUMP és el codi d'operació i indica que es tracta d'una instrucció de salt.
+		R1 és l'operand i indica que el programa ha de saltar a l’adreça de memòria que està en R1. Ara entrarem en detalls.
+	</p>
+
+	<p>
+		Un exemple d'instrucció de dos operands és <i>MOVE R1, R2</i>.
+	</p>
+	<p>
+		En este cas, MOVE és el codi d'operació i indica que es tracta d'una instrucció de transferència.
+		R1 i R2 són els operands i indiquen entre quins registres es copiaran les dades. Ara entrarem en detalls.
+	</p>
+	<p>
+		Amb dos operands, el de la dreta sempre és l’origen de la informació i el de l’esquerra la destinació.
+		En este cas, el MOVE copia contingut del registre R2 i al registre R1.
+	</p>
+
+	<h3>Tipus d'operands</h3>
+	<p>
+		Els operands poden ser:
+	</p>
+	<ul>
+		<li>
+			Un registre<br>
+			S'indica amb el nom del registre. Per exemple: R1
+		</li>
+		<li>
+			Una adreça de memòria<br>
+			S'indica amb l'adreça entre parèntesis. Per exemple: (3000)
+
+		</li>
+		<li>
+			Un nombre<br>
+			S'indica amb el nombre precedit d'un #. Per exemple: #15
+
+		</li>
+		<li>
+			Una adreça de memòria emmagatzemada en un registre<br>
+			S'indica amb el nom del registre entre parèntesis. Per exemple: (R5)
+		</li>
+	</ul>
+
+
+	<h3>Exemples d'operands</h3>
+
+	<p>
+		Entendre els operands és fonamental per entendre el llenguatge màquina.
+	</p>
+	<p>
+		A continuació, posarem exemples del codi d’operació MOVE combinat amb diferents tipus d’operand.
+		Si s’enten això, la resta d’instruccions resulten molt fàcils d’aprendre.
+	</p>
+
+
+	<p>
+		MOVE R1, R2
+	</p>
+	<ul>
+		<li>
+			Copia el contingut d'R2 a R1
+		</li>
+		<li>
+			Si R2 té un 10, en acabar la instrucció R1 tindrà un 10.
+		</li>
+		<li>
+			R2 manté el valor que tenia, el 10.
+		</li>
+		<li>
+			El valor que tenia R1 abans de la instrucció desapareix i es substitut pel 10.
+		</li>
+	</ul>
+
+	<p>
+		MOVE R1, #25
+	</p>
+	<ul>
+		<li>
+			Posa un 25 en R1.
+		</li>
+		<li>
+			El 25, o qualsevol altre nombre que posem, es copiarà a R1.
+		</li>
+		<li>
+			El valor que tenia R1 abans de la instrucció desapareix i es substitut pel 25.
+		</li>
+		<li>
+			El #, és només sintaxi, és una manera d’indicar que 25 és un nombre.
+		</li>
+	</ul>
+
+	<p>
+		MOVE R1, (2000)
+	</p>
+	<ul>
+		<li>
+			Copia el contingut de l’adreça de memòria 2000 en R1.
+		</li>
+		<li>
+			Esta instrucció implica que la UC sol·licita a la memòria principal el contingut de l’adreça de memòria 2000.
+			Quan el recupere es copiarà en el registre R1.
+		</li>
+		<li>
+			El contingut de l’adreça de memòria 2000 no es modifica.
+		</li>
+		<li>
+			Els parentesis són només sintaxi, és una manera d’indicar que el 2000 és una adreça de memòria.
+		</li>
+	</ul>
+
+	<p>
+		MOVE R1, (R2)
+	</p>
+	<ul>
+		<li>
+			Copia en R1, el contingut de l’adreça de memòria que indica R2.
+		</li>
+		<li>
+			Si R2 té un 2000, com R2 està entre parentesis, estem indicant que el seu contingut, el 2000, l’anem a tractar com
+			una adreça de memòria.
+		</li>
+		<li>
+			Fa el mateix que la instrució anterior, MOVE R1,(2000), o siga, copiar el contingut de l’adreça de memòria 2000 en R1.
+			La diferència està en que ara, enlloc de posar el 2000 en la pròpia instrucció el posem en el registre R2.
+		</li>
+		<li>
+			El contingut de l’adreça de memòria 2000 no es modifica.
+		</li>
+	</ul>
+
+
+	<p>
+		Si s’entent l’anterior, qualsevol altre combinació es fàcil d’entendre.
+	</p>
+	<ul>
+		<li>
+			MOVE (2000), R1: Copia el contigut de R1 en l’adreça de memòria 2000
+		</li>
+		<li>
+			MOVE (R2), #100: Posa un 100 en l’adreça de memòria que indica R2
+		</li>
+		<li>
+			MOVE (2000), #100: Posa un 100 en l’adreça de memòria 2000.
+		</li>
+	</ul>
+
+
+
+	<h3>Tipus d'operacions</h3>
+	<h4>Instruccions de transferència</h4>
+	<p>
+		La instrucció de transferència és MOVE i el que fa és copiar les dades des d'un origen a una destinació.
+		L'origen no modifica el seu contingut.
+		El que contenia la destinació és substituït pel valor que es copia.
+	</p>
+	<p>
+		L’operand d'origen pot ser un registre, una adreça de memòria o un nombre.
+	</p>
+	<p>
+		L’operand de destinació no pot ser un nombre, sempre ha de ser un registre o una adreça de memòria.
+		Això és lògic, pensa quin sentit tendria sinó una instrucció com <i>MOVE #30, R1</i>.
+	</p>
+	<p>
+		MOVE es pot usar amb estos operands:
+	</p>
+
+	<figure>
+		<img src="imatges/Instruccions de transferencia.png" />
+	</figure>
+
+	<p>
+		Quan expliquem què fa una instrucció l’estem estudiant des del punt de vista del programador.
+		Encara que no ho diguem, cada instrucció requerix una sèrie de passos que estan seqüenciats pels senyals de control
+		que marca la UC.
+	</p>
+	<p>
+		Posem un exemple amb la instrucció <i>MOVE R5,(R1)</i>.
+		Des del punt de vista d'un programador esta instrucció copia el contingut de l’adreça de memòria que conté R1 en R5.
+		Des del punt de vista de la CPU se seguixen estos passos:
+	</p>
+
+	<figure>
+		<img src="imatges/Move_r1_r5.svg" />
+	</figure>
+
+	<p>
+		La UC, amb els senyals de control oportuns i que no estan dibuixats, permet que el contigut del registre R1, un 1.000,
+		es volque en el bus intern. Seguidament, permet que el hi ha en el bus intern puga entrar en el registre d’adreces MAR.
+		Després permet que el contingut del registre MAR es volque en el bus d’adreces del sistema.
+		Avisa a la memòria amb un senyal de lectura. La memória, en rebre el senyal de lectura,
+		permet que el contingut del bus d’adreces puga entrar en el seu registre d’adreces MAR.
+		Una vegada ahí, en la memòria es desencadenen tota una sèrie de passos que busquen, en els seus bancs de memòria,
+		el contingut de l’adreça de memòria que està en el MAR, la 1.000.
+		En este cas, el contingut de l’adreça 1.000 és un 50 que es volcarà en el registre de dades MDR.
+	</p>
+	<p>
+		Ara es fa el camí de tornada del 50, que pasarà del MDR de la memòria al bus de dades i entrarà en el MDR de la CPU,
+		des d’on a través del bus intern s’encaminarà cap el registre R5.
+	</p>
+
+
+
+	<h4>Instruccions aritmètiques</h4>
+	<p>
+		Les operacions aritmètiques que l’ALU pot fer són: ADD, SUB, INC i DEC.
+	</p>
+	<p>
+		Sempre que l’ALU fa alguna d’estes operacion es modifiquen els bits Z i S del registre d’estat.
+		En l'apartat d’intruccions de comparació entrarem en detalls.
+	</p>
+	<p>
+		Les operacions aritmètiques només s’apliquen sobre registres i mai sobre adreces de memòria o nombres.
+		Si volem fer alguna operació aritmètica sobre alguna adreça de memòria haurem de llegir-la, fer l’operació i escriure el resultat en la mateix adreça.
+	</p>
+	<p>
+		Les instruccions ADD (suma) i SUB (resta) s'apliquen entre el registre Acumulador i el registre indicat en
+		la pròpia instrucció.
+		El resultat de l'operació es guarda sempre en l'Acumulador que perdrà el valor que tenia abans de l'execució de la instrucció.
+		Es modifiquen els bits del registre d’estat.
+	</p>
+	<p>
+		La instrucció INC suma 1 al registre que s'indica en la pròpia instrucció.
+		Es modifiquen els bits del registre d’estat.
+	</p>
+	<p>
+		La instrucció DEC resta 1 al registre que s’indica en la pròpia instrucció.
+		Es modifiquen els bits del registre d’estat.
+	</p>
+
+	<p>
+		ADD, SUB, INC i DEC es poden usar amb estos operands:
+	</p>
+
+	<figure>
+		<img src="imatges/Instruccions_aritmetiques.png" />
+	</figure>
+
+
+	<p>
+		Recordem que la realitat és el moviment de les dades marcat pels senyals de la UC.
+		En la següent figura fem un ADD A, R1.
+	</p>
+
+	<figure>
+		<img src="imatges/Exemple_add_a_r1.svg" />
+	</figure>
+
+	<p>
+		<i>
+			IMPORTANT: Hi ha un assumpte important del qual no n’hem parlat, i és el dels nombres negatius.
+			Com s’expressa un nombre negatiu en binari?
+			El mètode més utilitzat és el del Complement a 2.
+			Hi ha molta informació en Internet i no entrarem en este tema per simplificar.
+		</i>
+	</p>
+	<p>
+		<i>
+
+		</i>
+	</p>
+
+
+	<h4>Instruccions de comparació</h4>
+
+	<p>
+		La instrucció de comparació CMP compara els continguts del registre Acumulador i del registre que s'indica en la pròpia instrucció.
+	</p>
+	<p>
+		La comparació consisteix en restar de l'Acumulador el valor del registre indicat.
+		És com fer un <i>SUB A,registre</i> però amb la particularitat que el resultat d'esta resta es perd i no s'emmagatzema en l’Acumulador.
+	</p>
+	<p>
+		L'important ací és que el resultat de la resta quedarà reflectit en els bits del registre d'estat i ens permetrà saber si
+		els nombres són iguals, diferents o quin és més gran que l'altre.
+	</p>
+	<p>
+		Esta instrucció no actua a soles.
+		Qui es beneficiarà serà la següent instrucció, la qual mirarà com han quedat els registres d’estat i actuarà en conseqüència.
+		Ho vorem després amb exemples.
+	</p>
+	<p>
+		CMP s’usa nomes amb registres i mai amb adreces de memòria.
+	</p>
+
+	<figure>
+		<img src="imatges/Instruccions_comparacio.png" />
+	</figure>
+
+	<p>
+		Vegem a més atenció els bits Z i S del registre d’estat.
+	</p>
+	<p>
+		El bit Z s’anomena bit de zero:
+	</p>
+	<ul>
+		<li>
+			Es posa a 1 (Z=1) si el resultat de l’operació que ha fet l’ALU és un zero.
+			Per això, quan es fa una resta entre dos valors que són iguals es posa Z=1.
+			També passaria si sumarem dos valors iguals a 0.
+
+		</li>
+		<li>
+			Similarment, es posa a 0 (Z=0) quan l’ALU dóna un resultat diferent a cero.
+		</li>
+	</ul>
+
+
+	<p>
+		El bit S s’anomena bit de signe:
+	</p>
+	<ul>
+		<li>
+			Es posa a 1 (S=1) si el resultat de l’operació que ha fet l’ALU és negatiu.
+			Per això, quan es fa una resta entres dos valors, si el primer és menor que el segon, el resultat és negatiu i S=1.
+			També passaria si sumarem dos nombres i el resultat fóra negatiu.
+		</li>
+		<li>
+			Similarment, es posa a 0 (S=0) si el resultat es zero o positiu.
+		</li>
+	</ul>
+
+	<p>
+		A continuació crearem una taula on vorem con queden els bits Z i S després d’executar la instrucció CMP A,R2
+		amb diferents valors.
+	</p>
+	<p>
+		Les columnes de <i>Condició</i> i de <i>Bits comprovats</i> mostren de quina manera podem traure conclusions sobre A i R2.
+		Estes conclusions seran importants quan parlem de les instruccions de salt condicional que, com vorem, actuen d’una
+		manera o un altra en funció dels bits Z i S.
+	</p>
+
+	<p>
+		<i>
+			IMPORTANT: Per simplificar, suposarem que treballem sempre amb nombre positius.
+			Treballar amb nombre negatius implicaria haver d’explicar dos bits més del registre d’estat:
+			El bit de Desbordament (V) i el de Rossec (C).
+		</i>
+	</p>
+
+	<figure>
+		<img src="imatges/Exemple_cmp_a_r2.png" />
+	</figure>
+
+	<p>
+		Si combinem els significats de S i Z, podem deduir més condicions.
+	</p>
+
+	<figure>
+		<img src="imatges/Exemple_cmp_a_r2_2.png" />
+	</figure>
+
+
+	<h4>Instruccions de salt</h4>
+
+	<p>
+		Cada vegada que s’executa una instrucció el contingut del PC (comptador de programa) s’incrementa en 1,
+		seria com un <i>INC PC</i> automàtic.
+		D’esta manera, a l’iniciar-se un nou cicle d’instruccions, el PC apunta a la següent instrucció.
+	</p>
+	<p>
+		La seqüencialitat del cicle d’instruccions es pot trencar amb les instruccions de salt, les quals permeten triar l'adreça
+		de memòria on esta la següent instrucció que s'ha d'executar.
+		Es diu que una instrucció de salt modifica o <i>trenca el flux del programa</i>.
+	</p>
+	<p>
+		Hi ha diferents escenaris o es necessari l’ús d’instruccions de salt. Vegem-ne dos:
+	</p>
+	<ul>
+		<li>
+			Les subrutines.
+			Els programes estan subdividits en diferents parts especialitzades en fer una tasca determinada.
+			Les subrutines poden executar altres subrutines perquè estes facen la seua funció.
+			Executar un subrutina és simplement executar-la començant per la seua primera instrucció, i és amb les instruccions de salt
+			on s'indica l'adreça de memòria on esta esta primera instrucció. No ho vorem.
+		</li>
+		<li>
+			Els bucles. Un bucle és un tros de codi que es repetix diverses vegades.
+			En cada repetició, les instruccions són les mateixes però les dades a què afecten són diferents.
+			Trencar la seqüencialitat permet que el programa es col·loque de nou al començament de bucle.
+			S’entendrà millor en els exercicis.
+		</li>
+	</ul>
+
+	<h5>Instruccions de salt incondicional</h5>
+	<p>
+		L'execució de la instrucció JUMP trenca el flux del programa i fa que la següent instrucció siga la situada en l'adreça de memòria
+		indicada en la pròpia instrucció.
+		En realitat fer un salt consistix en carregar en el registre comptador de programa PC l'adreça de memòria desitjada i deixar
+		que la CPU continue amb el cicle d'instruccions. Seria com fer un <i>MOVE PC, #adreça</i>.
+	</p>
+	<p>
+		La manera d’indicar l’adreça de salt és posant-la en la pròpia instrucció, com en <i>JUMP #1000</i>,
+		o posant primer l’adreça en un registre a què després farem referència, com en <i>JUMP R1</i>.
+	</p>
+
+	<figure>
+		<img src="imatges/Intruccions_salt_incondicional.png" />
+	</figure>
+
+	<h5>Instruccions de salt condicional</h5>
+	<p>
+		De manera similar, estes instruccions servixen per a trencar el flux d'un programa.
+		Ara bé, abans de fer-ho comproven els bits de zero Z i de signe S del registre d'estat i, en funció de si estan actius o no,
+		fan o no fan el salt.
+	</p>
+	<p>
+		Si no fan el salt, la instrucció s'ignora i passa a executar-se la instrucció que va després de la pròpia instrucció de salt.
+	</p>
+	<p>
+		Com passa amb el salt incondicional fer un salt consistix en carregar en el registre comptador de programa
+		PC l'adreça de memòria desitjada.
+		De la mateix manera, l’adreça es fica directament en la pròpia instrucció o en un registre.
+	</p>
+
+	<p>
+		Les intruccions de salt condicional són:
+	</p>
+	<ul>
+		<li>JEQ (Jump if Equal): salta si major.</li>
+		<li>JNE (Jump if Not Equal): salta si no és igual.</li>
+		<li>JG (Jump if Greater than): salta si major que.</li>
+		<li>JGE (Jump if Greater or Equal than): salta si major o igual que.</li>
+		<li>JL (Jump if Lower than): salta si menor que.</li>
+		<li>JLE (Jump if Lower or Equal): salta si menor i igual que.</li>
+	</ul>
+
+	<p>
+		Les instruccions de salt condicional prenen la decisió de fer o no un canvi de flux a partir dels bits S i Z,
+		però elles no modifiquen estos bits, només els comproven.
+		Necessiten que alguna instrucció anterior modifiquen Z i S.
+	</p>
+	<p>
+		Esta instrucció sol ser la de CMP,
+		encara que podria ser qualsevol que modifique els bits del registre d’estat.
+		En el nostre cas són CMP, ADD, SUB, INC i DEC.
+	</p>
+	<p>
+		La següent taula mostra com actuen les intruccions de salt condicional en funció dels bits S i Z.
+	</p>
+
+	<figure>
+		<img src="imatges/Intruccions_salt_condicional.png" />
+	</figure>
+
+	<p>
+		Per aclarir com funcionen les instruccions de salt farem un programa que llig dos nombres i mira quin és el més gran dels dos.
+		Els nombres els agafa de memòria principal des les adreces de memòria 1.000 i 1.001.
+		El nombre més gran el deixa en l’adreça 1.002.
+	</p>
+	<p>
+		El programa és el següent:
+	</p>
+	<figure>
+		<img src="imatges/Programa_major_dos_nombres.png" />
+	</figure>
+
+	<p>
+		El conjunt de registres i adreces de memòria que es veuen afectades durant l’execució d’un programa s’anomena l’<i>estat del programa</i>.
+		L’ execució de cada instrucció afecta el seu estat, que va canviant, va evolucionat durant l’execució del programa.
+	</p>
+	<p>
+		Al procés de seguir instrucció a instrucció i anotar els canvis que provoquen en l’estat del programa s’anomena <i>fer la traça del programa</i>.
+	</p>
+	<p>
+		Per a fer la traça crearem una taula on tindrem tantes files com registres i adreces de memòria formen part l’estat del programa.
+		Cada columna serà una instrucció que identificarem per la seua adreça de memòria.
+	</p>
+	<p>
+		En el nostre cas, el programa comença en l’adreça 5.000 i acaba en la 5.007.
+		L’estat està format pels registres A i R1, i per les adreces de memòria 1.000, 1.001 i 1.002.
+	</p>
+	<p>
+		L’estat inicial del programa pot partir de 2 casos diferents.
+		Cada cas farà que el programa execute unes instruccions o unes altres.
+		Estos casos depenen dels valors inicials dels nombres a comparar que estan en les adreces 1.000 i 1001.
+	</p>
+	<p>
+		Estos casos són:
+	</p>
+	<ul>
+		<li>
+			Cas 1) El contingut de l’adreça 1.000 és major que el de la 1.001
+		</li>
+		<li>
+			Cas 2) El contingut de l’adreça 1.000 és menor o igual que el de la 1.001
+		</li>
+	</ul>
+
+	<p>
+		Cada cas generà una traça diferent.
+	</p>
+	<p>
+		Però abans observen el que s’anomena diagrama de flux.
+		En ell les instruccions estan emmarcades.
+		En requadres posem blocs d’instruccions i en un rombe instruccions que impliquen una decisió.
+		Les fletxes permeten seguir el flux del programa, o siga la seqüència d’instruccions.
+	</p>
+
+	<figure>
+		<img src="imatges/Flux_programa.svg" />
+	</figure>
+
+	<p>
+		Cada decisió fa que el programa puga seguir un de dos camins diferents.
+		Són camins antagònics, o un o l’altre.
+		Cada camí és fruit de la decisió contraria que et portaria per l’altre camí.
+	</p>
+	<p>
+		En el nostre cas la decisió es fa mirant si A>R1.
+		Si es complix la condició, el flux se’n va per la línia roja, sinó es complix, o siga que A ≤ R1,
+		el flux se’n va per la blava.
+	</p>
+
+	<p>
+		La decisió A>R1, necessita de dos instruccions:
+	</p>
+	<ul>
+		<li>
+			CMP A,R1 que canvia els bits Z i S.
+		</li>
+		<li>
+			JG #5006 que canvia el flux del programa segons els valors de Z i S generats per CMP.
+
+		</li>
+	</ul>
+
+	<p>
+		Les dos instruccions, CMP i JG, actuen com una sola que diguera:
+	</p>
+	<ul>
+		<li>
+			Si A>R1 la següent instrucció que s’executarà serà la 5006.
+
+		</li>
+		<li>
+			Sinó (o siga A ≤ R1) seguix amb el flux normal, o siga executa la següent instrucció, la 5004.
+		</li>
+	</ul>
+
+	<p>
+		Fixem-nos també amb la instrucció incondicional JUMP #5007. Evita que s’execute la instrucció del MOVE (1002), A.
+	</p>
+
+	<p>
+		La instrucció marcada amb punts suspensius no se sap quina és, en este cas no ens importa.
+	</p>
+
+
+	<p>Ara les 2 traces:</p>
+
+	<ul>
+		<li>
+			Cas 1) Suposem que les adreces 1.000 i 1.001 contenen: 1.000 ← 14 i 1001 ← 6.
+			<figure>
+				<img src="imatges/Programa_major_dos_nombres_traça_1.png" />
+			</figure>
+		</li>
+	</ul>
+	<p>
+		Si una instrucció no modifica un registre o una adreça de memòria deixem la casella en blanc.
+		Pasa per exemple en les instruccions 5.002 i 5003, en el CMP i el JG.
+		Encara que si que modifiquen l’estat de programa, el registre d’estat la primera i el PC la segona,
+		estos registres no els anotem per simplicar la taula.
+	</p>
+	<p>
+		Una casella en blanc indica que el seu contingut no s’ha modificat i que mantè el que tenia anteriorment.
+		Ho fem així per no omplir tant de nombre que pot molestar a fer la traça.
+	</p>
+
+	<ul>
+		<li>
+			Cas 2) Suposem que les adreces 1.000 i 1.001 contenen: 1000 ← 6 i 1001 ← 14.
+			<figure>
+				<img src="imatges/Programa_major_dos_nombres_traça_2.png" />
+			</figure>
+		</li>
+	</ul>
+
+</body>
+
+</html>

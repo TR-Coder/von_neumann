@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="ca">
+
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Document</title>
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300&family=Oswald&display=swap" rel="stylesheet">
+	<link rel="stylesheet" href="../estils/reset.css">
+	<link rel="stylesheet" href="../estils/estils.css">
+</head>
+
+<body>
+
+	<h2>El bus del sistema</h2>
+
+	<p>
+		Són el mitjà de comunicació intern de l'ordinador.
+		Estan formats per un conjunt de conductors elèctrics, anomenats pistes o línies, per on circulen els senyals (1 i 0)
+		que els components intercanvien entre ells.
+	</p>
+
+	<p>
+		Hi ha tres classes de busos:
+	</p>
+
+	<h3>Bus de dades</h3>
+	<p>
+		El bus de dades proporciona el camí per a transmetre la informació (dades i instruccions) entre els components de l'ordinador.
+		Sol constar de 8, 16, 32 o 64 línies diferents, segons la longitud de la paraula que s’utilitze.
+	</p>
+
+	<h3>Bus d'adreces</h3>
+	<p>
+		En les línies del bus d'adreces la UC col·loca l’adreça de memòria de la paraula a què vol accedir en la memòria principal.
+		Cada línia del bus d’adreces correspon a un bit en esta adreça.
+
+	</p>
+	<p>
+		Per tant, el nombre de línies del bus d’adreces indica el nombre de paraules màxim a què pot tindre accés la memòria principal.
+		Per exemple, amb 16 bits la CPU podrà accedir a 2<sup>16</sup> adreces de memòria, i amb 32, doncs a 2<sup>32</sup>.
+	</p>
+
+	<h3>Bus de control</h3>
+	<p>
+		Són un conjunt de línies que permeten sincronitzar el que s’està fent entre dos dispositius.
+		Per exemple, a través del bus la UC li indica a la memòria si el que vol es fer una operació de lectura o una d’escriptura.
+	</p>
+
+	<p>
+		En la següent figura es veuen les dos maneres habituals de dibuixar el busos.
+		Si hi ha poques línies es poden pintar de manera individual, però si en són moltes, son difícils de dibuixar
+		i es pinta en forma de fletxa.
+	</p>
+
+	<p>
+		Una flexa doble indica que són pistes bidireccionals i que poden ser utilitzades per tots els dispostius connectats al bus.
+		Si la fletxa en simple, el senyal va en una única direcció que és l'apuntada per la fletxa.
+	</p>
+
+	<figure>
+		<img src="imatges/Busos.svg" />
+	</figure>
+
+
+
+
+
+
+
+
+
+</body>
+
+</html>

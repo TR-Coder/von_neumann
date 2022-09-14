@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="ca">
+
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Document</title>
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300&family=Oswald&display=swap" rel="stylesheet">
+	<link rel="stylesheet" href="../estils/reset.css">
+	<link rel="stylesheet" href="../estils/estils.css">
+</head>
+
+<body>
+
+	<h3>Memòria cache</h3>
+
+
+	<h4>Principi de proximitat referencial</h4>
+
+	<p>
+		Quan es crea un programa se seguix una estratègia de dividix i guanyaràs, dividint el programa en parts menys complexes que
+		resolen diferents subproblemes.
+		Estes parts són blocs d’instruccions consecutives anomenats <i>subrutines</i> que poden ser cridades quan es necessiten des
+		d'altres parts del programa.
+	</p>
+	<p>
+		Anteriorment, hem estudiat que el processador executa les instruccions del programes una darrere de l’altra d'una manera seqüencial.
+		Bé, realment no sempre és seqüencial, de tant en tant hi ha salts, com quan el programa salta d’una subrutina a un altra.
+	</p>
+	<p>
+		L’important, pel que fa a la jerarquia de memòries, és que el normal dins d’una subrutina és que les instruccions s'hagen
+		d'executar consecutivament o, si no ho fan, que els salts siguen de curta distància (com passa amb els bucles que estudiarem després).
+	</p>
+
+	<p>
+		Les dades també solen ser seqüencials. Així en una foto per exemple, els píxels de la foto estan consecutius. Recordem que,
+		<i>grosso modo</i>, un píxel són 4 bytes, els corresponents a la seua component RGBA.
+	</p>
+
+	<p>
+		Tot això fa que, durant un interval de temps determinat, les instruccions que s’estan executant estiguen molts pròximes
+		entre elles ja que, per disseny, els programes tendixen a reutilitzar les instruccions que han utilitzat recentment.
+		Este característica s’anomena <i>proximitat referencial</i>.
+	</p>
+	<p>
+		A causa d’esta característica, se ha comprovat empíricament que el 90% de totes les instruccions que s’executen d’un
+		programa corresponen només a un 10% del seu codi total.
+	</p>
+
+	<h4>Funcionament de la cache</h4>
+
+	<p>
+		De manera lògica, la memòria cache està entre la memòria principal i el processador.
+		Fa uns anys, la memòria cache era físicament un xip que estava fora de l’encapsulat del processador,
+		però actualment està dins d’ell.
+	</p>
+	<p>
+		Encara que la memòria cache sol estar organitzada en més d’un nivell, nosaltres l’estudiarem considerant un únic nivell.
+		El funcionament si en té més d’un és molt semblant.
+	</p>
+	<p>
+		Com hem vist en l’apartat de jerarquia de memòries, l’objectiu de la cache és el de reduir el temps d’accés a les paraules que
+		contenen les instruccions o les dades que la CPU requerix.
+		Això s’aconseguix gràcies a que la cache és més ràpida que la memòria principal, encara que de molta menys capacitat, i a
+		que es complix el principi de proximitat referencial dels programes.
+	</p>
+
+	<p>
+		Si aconseguim que la majoria de vegades les paraules que busquen estiguen en la cache, farem que el processador no haja d’esperar
+		a la memòria principal que és molt més lenta.
+	</p>
+
+	<p>
+		El transvasament de dades entre la memòria principal i la memòria cache no es fa amb paraules individuals sinó en blocs
+		consecutius d'un nombre determinat de paraules.
+		Internament, la cache està organitzada per blocs de la mateix quatintat de paraules.
+	</p>
+
+	<figure>
+		<img src="imatges/Cache_blocs_paraules.svg" />
+	</figure>
+
+
+	<p>
+		La CPU no sap res de la cache, ella actua com si accedira a la memòria principal, indicant
+		l'adreça de memòria de la paraula que vol recuperar.
+		El que facen la cache i la memòria principal entre elles no es de la seua incumbència.
+	</p>
+
+	<p>
+		Quan la CPU busca una paraula, primer es mira si l'adreça de memòria que busca està en cache,
+		si és així es recupera la paraula corresponent i seguix amb el que estava fent.
+		En cas contrari, es desencadenarà en el maquinari de la cache un procés que farà que es sol·licite a la memòria principal
+		un bloc nou de paraules consecutives, entre les quals s’inclourà la paraula desitjada.
+		Una vegada el bloc estiga en cache se li entregarà a la CPU la paraula que buscava.
+	</p>
+
+
+	<p>
+		Quan la CPU no troba el que busca en la cache i s'ha de copiar tot un bloc des de memòria principal a la cache,
+		es perd molt més temps que si la CPU accedira directament a la memòria principal.
+		Però en conjunt, això es vorà compensat en propers accessos que, gràcies al principi de localitat referencial,
+		amb molta probabilitat, trobaran la paraula que busquen en la cache.
+	</p>
+
+
+	<h4>Nivells de cache</h4>
+
+	<p>
+		Els constants avanços en la fabricació de transistors i en la microelectrònica han permés que, cada vegada més,
+		es puguen integrar quantitats més elevades de transistors en un únic xip.
+		Estem parlant de quantitats que poden superar els 2.500 milions de transistors.
+		Per curiositat, l’Intel 4004 tenia 2.300 transistors.
+	</p>
+	<p>
+		Esta evolució ha possibilitat incloure en un únic xip més d’una CPU, cada CPU s’anomena nucli i inclou totes les unitats
+		funcionals que hem estudiat. Se’ls coneix com a processadors multinucli.
+	</p>
+	<p>
+		La utilització de les memòries cache també ha evolucionat incorporant-se més nivells de cache.
+		Actualment se sol treballar amb 3 nivells, anomenats L1, L2 i L3 (la L de Layer)
+	</p>
+
+	<figure>
+		<img src="imatges/Processador_multinucli.svg" />
+	</figure>
+
+	<p>
+		Així el nivell L1 és una cache individual per a cada nucli que, a més, està dividia en dos parts, una dedicada a
+		instruccions i un altra a dades.
+		El nivell L2 és una cache unificada per a cada nucli.
+		I el nivell L3 és una cache unificada i compartida per tots els nuclis.
+	</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+</body>
+
+</html>

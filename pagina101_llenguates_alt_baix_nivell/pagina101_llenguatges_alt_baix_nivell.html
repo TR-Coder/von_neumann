@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="ca">
+
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Document</title>
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300&family=Oswald&display=swap" rel="stylesheet">
+	<link rel="stylesheet" href="../estils/reset.css">
+	<link rel="stylesheet" href="../estils/estils.css">
+</head>
+
+<body>
+
+	<h2>Llenguatges d'alt i de baix nivell</h2>
+
+	<p>
+		Com hem estudiat, el processador està en bucle infinit, el cicle d’instruccions, en què executa les instruccions seqüencialment
+		durant tot el temps en què està en marxa.
+		Està seqüència d’instruccions en binari és el que es coneix com a <i>codi màquina</i> i és específic de cada processador.
+	</p>
+	<p>
+		Només els primers ordinadors es programaven en binari.
+		Com era un procés lent, inexpressiu i propens a errors, es va passar a substituir eixos 0 i 1 per l’ensamblador.
+		D’esta manera, cada instrucció màquina s’expressa amb una paraula (com MOVE, ADD o JUMP) que representen el que fa eixa
+		instrucció.
+	</p>
+	<p>
+		L’ensamblador, es coneix com a llenguatge de baix nivell, volent indicar que té una traducció directa al codi màquina.
+		Actualment pocs programes es fan en ensamblador ja que, encara que és més fàcil d’entendre que el binari pur,
+		continua generant programes llargs, difícils de depurar i de comprendre.
+	</p>
+	<p>
+		L’avantatge de l’ensamblador és que el codi que genera és el més ràpid possible i que permet que el programador
+		tinga un control total del que fa el seu programa.
+		A pesar d’això, l’ensamblador només s’utilitza quan es treballa a nivell d’electrònica digital, quan es requerix màxima
+		velocitat o quan l’espai de memòria es escàs i cada byte compta.
+	</p>
+	<p>
+		El pas següent va ser l'aparició dels llenguatges d’alt nivell.
+		En ells, ens oblidem un poc del maquinari i ens centrem en el que el programa ha de fer.
+		Les instruccions dels llenguatges d’alt nivell són més expressives, són més fàcils de combinar i d’entendre.
+	</p>
+	<p>
+		Independentment del llenguatge d'alt nivell que utilitzem, al final de tot, el que el processador executa són les instruccions
+		màquina i, a l’igual que l’ensamblador es traduïx directament a codi màquina, cada una de les instruccions d’alt nivell s’han
+		de traduir en moltes instruccions màquina.
+		Per a fer està traducció s’utilitzen un programes de traducció que fan la transformació des d’un llenguatge d’alt nivell
+		en particular a un llenguatge màquina també en particular específic d’un processador.
+	</p>
+	<p>
+		N’hi ha dos tipus de programes traductors: els compiladors i els intèrprets.
+		Els compilador traduïxen un programa complet d’alt nivell a codi màquina, mentre que els intèrprets van fent esta traducció
+		segons el programa es va executant.
+	</p>
+	<p>
+		Dins dels llenguatges d’alt nivell, n’ hi ha que es consideren com a de nivell mig, com per exemple el C.
+		Es diu que són llenguatges pròxims a la màquina ja que, a pesar de ser d’alt nivell, permeten manipular directament el maquinari
+		de l’ordinador.
+		La traducció a codi màquina no es tan directa com la de l’ensamblador, però el codi generat està molt optimitzat i la facilitat
+		de programació que aporta compensa molt la xicoteta pèrdua de velocitat d’execució i l’augment de la mida del programa que
+		es genera.
+	</p>
+
+	<p>
+		Una avantatge dels llenguatges d’alt nivell és que poden ser independents del codi màquina del processador.
+		Així, un mateix programa en C pot ser traduït a diferents codis màquina de diferents processadors utilitzant el
+		compilador adequat.
+	</p>
+
+
+
+
+
+
+
+
+
+
+
+</body>
+
+</html>

@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="ca">
+
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Document</title>
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300&family=Oswald&display=swap" rel="stylesheet">
+	<link rel="stylesheet" href="../estils/reset.css">
+	<link rel="stylesheet" href="../estils/estils.css">
+</head>
+
+<body>
+
+	<h2>El cicle d'intruccions (versió ampliada)</h2>
+
+	<p>
+		Ara que coneixem les part internes de la CPU podem vore amb més deteniment, els passos que es seguixen durant
+		les fases del cicle d'instruccions:
+	</p>
+
+	<h3>Fase de busca</h3>
+
+	<p>
+		Com sabem, el registre PC (comptador de programa) conté l'adreça de memòria de la següent instrucció que s'ha d'executar.
+	</p>
+	<p>
+		En esta primera fase del cicle d'instruccions, la UC demana a la memòria que li subministre esta instrucció.
+		Es seguixen estos passos:
+	</p>
+
+	<figure>
+		<img src="imatges/Fase_busca.svg" />
+	</figure>
+
+
+	<ul>
+		<li>
+			Unitat de control
+			<ol>
+				<li>
+					Passa el contingut del registre PC (comptador de programa) al registre MAR (registre d'adreces de memòria).
+				</li>
+				<li>
+					Permet eixir el contingut del registre MAR (registre adreces de memòria) al bus d'adreces.
+				</li>
+				<li>
+					Envia un senyal de lectura a la memòria. La línia de lectura forma part del bus de control.
+				</li>
+			</ol>
+		</li>
+		<li>
+			Memòria
+			<ol>
+				<li>
+					Al rebre el senyal de lectura captura l'adreça que hi ha en el bus d'adreces i la guarda en el
+					MAR (registre adreces de memòria).
+				</li>
+				<li>
+					Busca internament la paraula que està en l’adreça que indica el MAR.
+				</li>
+				<li>
+					Quan l'ha trobat, la deixa en el registre MDR (registre dades de memòria).
+				</li>
+				<li>
+					Avisa al processador, amb un senyal de control que ja pot recuperar la paraula sol·licitada.
+				</li>
+				<li>
+					Deixa eixir al bus de dades la paraula continguda en el MDR.
+				</li>
+			</ol>
+		</li>
+		<li>
+			Unitat de control
+			<ol>
+				<li>
+					Al rebre el senyal que ha enviat la memòria, llig el contingut del bus de dades i el copia en el
+					registre MDR (registre dades de memòria).
+				</li>
+				<li>
+					Li suma 1 a l'adreça emmagatzemada en el registre PC,
+					d'esta manera queda apuntant a la següent instrucció per al següent cicle d'intruccions.
+				</li>
+			</ol>
+		</li>
+	</ul>
+
+	<h4>Fase de descodificació</h4>
+	<p>
+		La unitat de control passa la paraula del registre MDR al registre IR (registre d'instruccions).
+		A continuació, interpreta el contingut d'este registre i decidix quins són els passos a seguir.
+	</p>
+
+	<figure>
+		<img src="imatges/Fase_descodificacio.svg" />
+	</figure>
+
+	<h4>Fase d'execució</h4>
+	<p>
+		La unitat de control genera una seqüència de senyals de control que arriben a les diferents parts de la CPU (registres i ALU).
+		Eixa seqüència dicta el moviments de paraules i les operacions que s’han de fer per a executar la instrucció.
+		Algunes d’estes accions poden ser:
+	<ul>
+		<li>
+			Transferència de dades entre la CPU i la memòria principal o la E/E.
+		</li>
+		<li>
+			Operacions aritmètiques o lògiques sobres les dades.
+		</li>
+		<li>
+			Alteració de la seqüència d'operacions (salts)
+		</li>
+		<li>
+			Una combinacions de les anteriors.
+		</li>
+	</ul>
+	</p>
+
+	<p>
+		L’execució d’una instrucció pot implicar més d’un accés a la memòria principal a banda del necessari per a llegir
+		la pròpia instrucció. Ara quan vegem que fan les instruccions quedarà clar.
+	</p>
+
+
+</body>
+
+</html>

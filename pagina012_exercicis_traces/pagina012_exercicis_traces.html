@@ -1,0 +1,499 @@
+<!DOCTYPE html>
+<html lang="ca">
+
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Document</title>
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300&family=Oswald&display=swap" rel="stylesheet">
+	<link rel="stylesheet" href="../estils/reset.css">
+	<link rel="stylesheet" href="../estils/estils.css">
+</head>
+
+<body>
+
+	<h2>Exercicis resolts: Traces de programes en ensamblador</h2>
+
+	<p>
+		Un processador no sap el fa, seguix cegament les instruccions del programa.
+		És responsabilitat del programador donar la lògica al programa, analitzar tots els possibles casos que es poden donar i
+		codificar les instruccions adequades.
+	</p>
+
+	<p>
+		El següents programes ja estan fets. Amb les traces es pretén comprendre la lògica que seguix un processador per a resoldre
+		problemes. Els programes dels exercicis són senzills i fan coses poc espectaculars.
+		Però no t’enganyes, tot el que veus per pantalla, i el que no veus, es fa amb estes instruccions que hem estudiat.
+		Realment ja molt més que estudiar, però no canvia substancialment el que hem aprés.
+	</p>
+
+	<h3>Sumar tres nombres</h3>
+	<p>
+		El següent programa suma tres nombres.
+	</p>
+	<p>
+		El nombres estan en les adreces de memòria 1.000, 1.001 i 1.002, el resultat de la suma el deixarà en l'adreça 2.000.
+	</p>
+	<p>
+		El programa està emmagatzemat a partir de l'adreça 5.000.
+	</p>
+
+	<figure>
+		<img src="imatges/Exercici_sumar_tres_nombres.png" />
+	</figure>
+
+	<p>
+		Com a estat inicial suposarem els següents valors: 1.000←8, 1.001←4 i 1.002←5.
+	</p>
+
+	<figure>
+		<img src="imatges/Traça_exercici_sumar_tres_nombres.png" />
+	</figure>
+
+
+	<h3>Sumar n nombres</h3>
+
+	<p>
+		El següent programa suma qualsevol quantitat de nombres emmagatzemats a partir de l'adreça de memòria 1.000.
+		El resultat de la suma el deixa l'adreça 2.000.
+	</p>
+	<p>
+		Com en este programa trobem un bucle, vegem primer què és un bucle:
+		Un bucle és una seqüència d’instruccions que s’executa repetidament.
+		Cada repetició del codi s’anomena una <i>iteració</i>.
+	</p>
+	<p>
+		Eixir d'un bucle o continuar interant en ell es decidix comprovant si es complix o no una determinada condició.
+		Encara que, en cada iteració les instruccions a executar són les mateixes, les dades no són les mateixes.
+	</p>
+	<p>
+		Un bucle que no deixa mai d’iterar es diu que és un <i>bucle infinit</i>.
+	</p>
+	<p>
+		Com a exemple pràctic, centrem-nos en el nostre programa. El codi és el següent:
+	</p>
+
+	<figure>
+		<img src="imatges/Exercici_sumar_n_nombres.png" />
+	</figure>
+
+	<p>
+		Enquadrat en roig està el bucle. La condició d’eixida la formen les instrucions requadrades en vert.
+	</p>
+	<p>
+		En el registre R2 tenim la quantitat de nombres que sumarem.
+		En esta traça seran 100, en la línia 5.001 assignem este valor amb un <i>MOVE R2, #100</i>.
+		És diu que R2 és un comptador.
+	</p>
+	<p>
+		Al final de cada iteració, anem decrementant en 1 el valor d’R2 amb <i>DEC R2</i> i quan R2 val 0 significarà que hem compat 200
+		i per tant hem acabat.
+	</p>
+	<p>
+		Quan fem un <i>DEC R2</i> no només restem 1 a R2 si no que automàticament es modifiquen el bits Z i S del registre d’estat.
+	</p>
+	<p>
+		La instrucció <i>JNE #5003</i> provoca que la següent instrucció serà la 5.003 (la primera del bucle) si el bit Z=0,
+		dit d’altra manera si R2≠0. Quan R2=0 la condició no és complirà i la següent instrucció serà la 5.008, ja haurem eixit del bucle.
+	</p>
+	<p>
+		Vegem com es fa la suma.
+	</p>
+	<p>
+		En l’Acumulador anem acumulant la suma (per això es diu registre Acumulador).
+		En la línia 5.000 fem un <i>MOVE A, #0</i> ja que no sabem quin valor té actualment l’Acumulador.
+	</p>
+	<p>
+		Utilitzarem el registre R1 com un punter, és a dir, conté una adreça de memòria.
+		Inicialment li assignem un 1.000 amb un <i>MOVE R1,#1000</i>. Es diu que R1 apunta a l’adreça 1.000.
+	</p>
+	<p>
+		Ara entre en el bucle:
+	</p>
+	<ul>
+		<li>
+			En la 5.003 càrreguem en el registre R3 el contingut de l’adreça de memòria a què apunta R1, o siga, el contingut de
+			l’adreça 1.000 que conté el primer dels nombres a sumar.
+		</li>
+		<li>
+			En la 5.004 sumem a l’acumulador en valor que acaben de recuperar.
+		</li>
+		<li>
+			En la 5.005 incremente en 1 el contingut d’R1, que passarà a vadre 1.000 a 1.001.
+			El que estem és apunte a la següent adreça de memòria que volem sumar, que ho farem en la següent iteració del bucle.
+		</li>
+		<li>
+			Ara ja ve la condició de permanència en le bucle.
+			Restem 1 a R2, que passarà a valdre 99.
+			Com no és zero la següent instrucció que s’executarà serà la 5.003.
+		</li>
+	</ul>
+	<p>
+		Hem fet ja la 1a iteració del bucle i comencem amb la 2a.
+		Les instruccions són les mateixes però les dades diferents.
+		Ara, en R1 tenim 1.001 (en la 1a iteració era 1.000).
+		Ara en A tenim el contingut de l’adreça 1.000 i al llarg de esta iteració li sumarem el de la 1.001.
+	</p>
+	<p>
+		Novament incrementen R1 perquè apunte a la següent adreça a sumar (la 1.002), decrementem R1 y verifiquem si ha arribat
+		o no a zero.
+	</p>
+	<p>
+		Este lògica seguirà i només es trencarà en l’última iteració, en eixos moments R1=0 i en A hauren anant acumulant els 100
+		nombres que teniem en memòria.
+	</p>
+	<p>
+		Només queda deixar en l’adreça 2.000 el resultat de la suma fent un MOVE (2000),A
+	</p>
+
+	<p>
+		Ara farem la traça. Com fer una traça de 100 nombres seria molt llarg, farem la traça només de les primeres 3 iteracions.
+	</p>
+	<p>
+		Suposarem que els valors de les adreces de memòria a sumar són: 1.000←4, 1.001←8 i 1.002←3.
+	</p>
+
+	<figure>
+		<img src="imatges/Traça_exercici_sumar_n_nombres.png" />
+	</figure>
+
+	<h3>Copiar un bloc de memòria</h3>
+	<p>
+		En el següent programa partim de n posicions de memòria amb una sèries de valors.
+		El que fa el programa és una còpia d’estos valors i els deixa en un altre lloc de memòria.
+	</p>
+	<p>
+		El bloc inicial comença en l'adreça de memòria 1.000 i el bloc destinació en la 2.000.
+		Suposarem que volem copiar 100 nombres.
+	</p>
+	<p>
+		El funcionament és paregut al de l’exercici anterior ja que conté un bucle amb la mateixa condició d’eixida.
+	</p>
+	<p>
+		Utilitzem 4 registres per a muntar la lògica del programa amb les següents funcions:
+	</p>
+	<ul>
+		<li>
+			R1 apunta a l'adreça de memòria d’on anirem llegint els valors.
+		</li>
+		<li>
+			R2 apunta a l'adreça de memòria on anirem deixant els valors.
+		</li>
+		<li>
+			R3 és un comptador amb el nombre d'adreces que queden per copiar, quan arribe a zero voldrà dir que hem acabat.
+		</li>
+		<li>
+			R4 guardem temporalment l'adreça de memòria que estem copiant.
+		</li>
+	</ul>
+
+	<p>
+		El programa és el següent:
+	</p>
+
+	<figure>
+		<img src="imatges/Exercici_copiar_bloc_memòria.png" />
+	</figure>
+
+	<p>
+		Com que en el nostre conjunt d’instruccions no existix una instrucció de còpia de memòria a memòria del tipus <i>MOVE (R2),(R1)</i>
+		ens toca fer-ho amb dos passos.
+		Primer recuperem un valor des de el bloc de memòria inicial amb <i>MOVE R4, (R1)</i> i després copiem este valor al bloc destinació
+		amb <i>MOVE (R2), R4</i>. Utilitzem R4 per guardar temporalment el valor copiant-se.
+	</p>
+	<p>
+		La condició de permanència en el bucle la definixen les instruccions 5.007 i 5.008.
+		Mestre R3 no arribe a zero es complirà la condició JNE i el flux de programa es redirigirà al començament del bucle en la línia 5.003.
+	</p>
+	<p>
+		En cada iteració van avançant els punters cap el bloc inicial i final, amb un <i>INC R1</i> i <i>INC R2</i>.
+	</p>
+	<p>
+		Ara fem la traça. La farem només de les 3 primeres iteracions del bucle.
+	</p>
+	<p>
+		Suposarem que els valors de les adreces de memòria a sumar són: 1.000←4, 1.001←8 i 1.002←3.
+	</p>
+
+	<figure>
+		<img src="imatges/Traça_exercici_copiar_bloc_memòria.png" />
+	</figure>
+
+	<h3>Comprovar si un nombre està entre un interval</h3>
+	<p>
+		El següent programa comprova si un nombre x està entre altres dos a i b. És a dir si x [a,b].
+	</p>
+	<p>
+		Suposarem que:
+	</p>
+	<ul>
+		<li>a el guardem en l'adreça 1.000</li>
+		<li>b en l'adreça 1.001</li>
+		<li>x en l'adreça 1.002</li>
+	</ul>
+	<p>
+		És com si volguérem verificar si (1.002)  [(1.000), (1.001)]
+	</p>
+	<p>
+		Si està entre els altres dos posarem un 0 en l'adreça 1003, sinó posarem un 1.
+	</p>
+
+	<p>
+		El programa és:
+	</p>
+	<figure>
+		<img src="imatges/Exercici_nombre_en_interval.png" />
+	</figure>
+
+	<p>
+		Inicialment assumirem que x està entre a i b. Per això, en la línia 5.000 fem un <i>MOVE (1003),#0</i>.
+		Si després resulta que no és així, ja ho canviarem. En concret, això passa en la línia 5.008 que fa un <i>MOVE (1003),#1</i>.
+	</p>
+	<p>
+		En 5.001 carreguem en R1 el valor de x.
+	</p>
+	<p>
+		En 5.002 carreguem en A el valor de a.
+	</p>
+	<p>
+		Les línies 5.003 i 5.004 treballen juntes.
+		El que expressen és que si A>R1 la següent intrucció serà la 5.009.
+		Que A>R1, és el mateix que dir que a>x, per tant x està fora de l’interval.
+		I com havíem assumit que està fora, ja hem acabat i no cal fer res més.
+	</p>
+	<p>
+		A la línia 5.005 arribarem només si no es complix la condició anterior, o siga si a≤x.
+		Esta línia carrega en A el valor de b.
+	</p>
+	<p>
+		Les línies 5.006 i 5.007 treballen juntes. El que expressen és que si A&lt;R1, o siga si b&lt;x.
+		Si es complix açò, vol dir que x està fora de l’interval i, com abans, com havíem assumit que està fora, ja hem acabat
+		i per aixó saltem a la 5.009.
+	</p>
+	<p>
+		A la instrucció 5.008 només s’arriba si el flux del programa ha aconseguit passar les dos condicions,
+		les del JG i el JL.
+		Això vol dir que x està entre els valor d’a i b, i ho indiquen amb el <i>MOVE (1003), #1</i> canviant
+		la suposició inicial de que estava fora.
+	</p>
+
+
+	<p>
+		Ara la traça del programa.
+		Recordem: a en a 1.000, b en la 1.001 i x en la 1.002
+	</p>
+	<p>
+		Ens tocarà fer 3 traces possibles ja que hi ha 3 casos possibles.
+	</p>
+
+	<p>
+		CAS 1) x està fora de [a,b] perquè x&lt;a
+	</p>
+	<p>
+		Suposem que les adreces 1000←8, 1001←15 i 1002←4
+	</p>
+
+	<figure>
+		<img src="imatges/Traça_exercici_nombre_en_interval_1.png" />
+	</figure>
+
+	<p>
+		CAS 2) x està dins de [a,b]
+	</p>
+	<p>
+		Suposem que les adreces 1000←8, 1001←15 i 1002←10
+	</p>
+
+	<figure>
+		<img src="imatges/Traça_exercici_nombre_en_interval_2.png" />
+	</figure>
+
+	<p>
+		CAS 3) x està fora de [a,b] perquè x&lt;b
+	</p>
+	<p>
+		Suposem que les adreces 1000←8, 1001←15 i 1002←18
+	</p>
+
+	<figure>
+		<img src="imatges/Traça_exercici_nombre_en_interval_3.png" />
+	</figure>
+
+
+	<h3>Compta en llista els nombres que superen un determinat</h3>
+
+	<p>
+		El següent programa recorre una llista de n nombres i compta quants d’ells superen un determinat valor límit.
+	</p>
+	<p>
+		Suposarem que:
+	</p>
+	<ul>
+		<li>
+			La llista conté 50 nombres i que comença en l’adreça de memòria 1.000.
+		</li>
+		<li>
+			El valor que hem de verificar si se supera està en l’adreça 2.000
+		</li>
+		<li>
+			En l’adreça 2.001 deixarem la quantitat que hem comptat.
+		</li>
+	</ul>
+
+	<p>
+		Utilitzem 4 registres per a muntar la lògica del programa amb les següents funcions:
+	</p>
+	<ul>
+		<li>R1 apunta a l’adreça de memòria que estem llegint de la taula.</li>
+		<li>R2 indica la longitud de la taula.</li>
+		<li>R3 va comptant quants nombres superen el valor límit.</li>
+		<li>R4 conté el nombre límit.</li>
+	</ul>
+
+	<p>
+		El programa és:
+	</p>
+
+	<figure>
+		<img src="imatges/Exercici_quantitat_superen_limit.png" />
+	</figure>
+
+
+	<p>
+		El programa utilitza un bucle per a recórrer la llista.
+	</p>
+	<p>
+		Utilitza R2 com un registre comptador. Inicialment li assigna la longitud de la llista fent un <i>MOVE R2, #50</i>.
+	</p>
+	<p>
+		Al final del bucle decrementem en 1 el seu valor amb un <i>DEC R2</i> i amb la següent instrucció <i>JNE #5004</i> verifquem si arribat a 0.
+		Si no ha arribat començarem una nova iteració del bucle, si ha arribat el programa acaba anotant en l’adreça 2.001 la quantitat que hem anant
+		comptant en R3.
+	</p>
+	<p>
+		Dins del bucle tenim una condició addicional, però està no es per a decidir si continuar o no iterant en el bucle, sinó per a saltar-nos o no la
+		instrucció 5.007, un <i>INC R3</i> que va sumant 1 cada vegada que es complix la condició marcada amb color taronja.
+	</p>
+	<p>
+		Esta condició compara A, que conté el valor de la taula que estem llegint en la iteració actual, amb R4, que conté el nombre límit i, si <i>A≤R4</i>,
+		o siga que el valor llegit es menor o igual que el valor límit, se salta a la instrucció 5.008.
+		En cas contrari, <i>A>R4</i>, és que si el supera, aleshores no es fa el salt i la següent instrucció fa l’increment <i>INC R3</i> al comptador de nombres
+		que superen el límit.
+	</p>
+
+	<p>
+		Ara fem la traça. La farem només de les 3 primeres iteracions del bucle.
+	</p>
+	<p>
+		Suposarem que els valors de les adreces de memòria a verificar són: 1.000←30, 1.001←5 i 1.002←10. <br>
+		El valor límit és 1.002←10
+	</p>
+
+	<figure>
+		<img src="imatges/Traça_exercici_quantitat_superen_limit.png" />
+	</figure>
+
+	<h3>Comprovar si dos paraules són iguals</h3>
+	<p>
+		El següent programa verifica si dos paraules són iguals.
+	</p>
+	<p>
+		Una paraula no és més que una sequència de nombres on cada lletra s’interpreta gràcies a que està codificada segons un taula.
+		En el nostre cas suposarem l’ASCII.
+	</p>
+	<p>
+		Per a saber quan acaba una paraula la marcarem amb un 0.
+		Com el 0 en ASCII no té associat cap lletra aixó ens pot servir com a delimitador.
+	</p>
+	<p>
+		Amb el dit, verificar que dos paraules són iguals és verificar que dos llistes tenen els mateixos nombres.
+	</p>
+	<p>
+		Suposarem que:
+	</p>
+	<ul>
+		<li>Una paraula acaba amb un 0</li>
+		<li>La primera paraula comença en l’adreça 5.000 i la segona en la 6.000</li>
+		<li>Si els paraules són iguals posarem un 1 en l’adreça 4.000, i si són diferent un 0.</li>
+	</ul>
+
+	<p>
+		El programa és el següent:
+	</p>
+
+	<figure>
+		<img src="imatges/Exercici_comparar_paraules.png" />
+	</figure>
+
+	<p>
+		La lògica del programa és:
+	</p>
+	<ul>
+		<li>
+			Inicialment assumim que les paraules són diferents i posem un 0 en l’adreça 4000.
+		</li>
+		<li>
+			Amb R5 recorrerem les lletres de la primera paraula.
+			Inicialment apunta l'adreça de la primera lletra.
+		</li>
+		<li>
+			Amb R6 recorrerem les lletres de la segona paraula.
+			Inicialment apunta a l'adreça de la primera lletra.
+		</li>
+		<li>
+			Entrem en un bucle. Cada iteració agafarà la lletra d’una i de l’altra paraula.
+			El bucle està requadrat en roig.
+		</li>
+		<li>
+			Compara les dos lletres i mira si són diferents i si ho són acaba el programa.
+			Està requadrat en verd.
+		</li>
+		<li>
+			En cas contrari és que les lletres són iguals.
+		</li>
+		<li>
+			Però poden ser iguals a zero, el que significa que hem arribat al final de les paraules i que estes són iguals.
+			Està requadrat en taronja.
+			En este cas posem un 1 en l’adreça 4000 (línia 1.003) i acaba el programa.
+		</li>
+		<li>
+			Si no són iguals a zero, passem a la següent lletra de cada paraula.
+			Esta requadrat en negre.
+		</li>
+	</ul>
+
+	<p>
+		Ara fem la traça. Tenim dos casos:
+	</p>
+
+	<p>
+		CAS 1) Les paraules són iguals i són:
+	</p>
+	<ul>
+		<li>5000←10, 5001←14 i 5002←0</li>
+		<li>6000←10, 6001←14 i 6002←0</li>
+	</ul>
+
+
+	<figure>
+		<img src="imatges/Traça_exercici_comparar_paraules_1.png" />
+	</figure>
+
+	<p>
+		CAS 2) Les paraules són diferents i són:
+	</p>
+	<ul>
+		<li>5000←10, 5001←14 i 5002←0</li>
+		<li>6000←10, 6001←25, 6002←16 i 6003←0</li>
+	</ul>
+
+	<figure>
+		<img src="imatges/Traça_exercici_comparar_paraules_2.png" />
+	</figure>
+
+</body>
+
+</html>
