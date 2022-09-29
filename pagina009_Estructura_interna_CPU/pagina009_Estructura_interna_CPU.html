@@ -33,7 +33,7 @@
 	</p>
 	<p>
 		La següent figura mostra l’esquema intern de la CPU que estudiarem i com es connecta a la memòria i als dispositius
-		d’entrada i eixida, a través dels busos del sistema.
+		d’entrada i eixida a través dels busos del sistema.
 	</p>
 
 	<figure>
@@ -42,16 +42,14 @@
 
 	<h3>La unitat de control</h3>
 	<p>
-		La Unitat de control és el cervell de l’ordinador.
-	</p>
-	<p>
-		La UC és l’encarregada de demanar les instruccions a la memòria principal, de descodificar-les i d’executar-les.
+		La Unitat de control és el cervell de l’ordinador,
+		és l’encarregada de demanar les instruccions a la memòria principal, de descodificar-les i d’executar-les.
 		Descodificar és desglossar les parts en què està formada un instrucció i a partir d'ací generar, en cada cas, la
 		seqüència de senyals de control necessàries per moure i coordinar el moviment de les paraules entre les diferents
 		parts de la CPU.
 	</p>
 	<p>
-		També controla la resta de components de la CPU, i damunt és l’encarregada de llegir i d’escriure paraules en la memòria
+		La UC controla també la resta de components de la CPU i és l’encarregada de llegir i d’escriure paraules en la memòria
 		principal i en els dispositius d’entrada i eixida segons ho dicten les instruccions.
 	</p>
 
@@ -89,8 +87,7 @@
 
 	<h4>Registres de propòsit específic</h4>
 	<p>
-		Són utilitzats per a controlar el funcionament propi de la CPU.
-		Els registres més comuns d'este tipus són:
+		Són utilitzats per a controlar el funcionament propi de la CPU. Tenim:
 	</p>
 
 
@@ -98,8 +95,8 @@
 		<li>
 			<h5>El registre PC (comptador del programa)</h5>
 			<p>
-				És un registre que emmagatzema l'adreça de memòria de la següent instrucció que s'ha de llegir de la RAM.
-				En la majoria de CPU cada vegada que es llig una instrucció des de la memòria el PC s'incrementa en 1 de manera automàtica.
+				És un registre que emmagatzema l'adreça de memòria de la següent instrucció que s'ha de llegir de la RAM per a ser executada.
+				Cada vegada que s'acaba l'execució d'una instrucció el valor deñ PC s'incrementa en 1 de manera automàtica.
 				Com vorem, existixen instruccions que permeten canviar el valor del PC i que servixen per a modificar el flux del programa.
 			</p>
 		</li>
@@ -123,22 +120,21 @@
 			</p>
 		</li>
 		<li>
-			<h5>El Registre d'estat)</h5>
+			<h5>El Registre d'estat</h5>
 			<p>
-				És un conjunt de bits on cadascun d'ells indica l'estat de l'última operació realitzada per l'ALU.
+				Cada bit del registre d’estat té un significat propi que indica l'estat de l'última operació realitzada per l'ALU.
 			</p>
 		</li>
 		<li>
 			<h5>El Registre A (registre acumulador)</h5>
 			<p>
-				El l'origen de les operacions que efectua l'ALU i la destinació del resultat que generen la majoria
-				d'instruccions que fan operacion matemàtiques i lògiques.
+				L’Acumulador és sempre un dels operands que intervenen en les operacions aritmeticològiques que efectua l’ALU.
+				El resultat d’estes operacions es deixa també en el registre Acumulador.
 			</p>
 		</li>
 	</ul>
 
-
-	<h4>Bus intern</h4>
+	<h3>Bus intern</h3>
 	<p>
 		Els registres de la CPU estan interconnectats entre ells a través d'un bus intern propi amb una funció similar a la del
 		bus del sistema, la de permetre el moviment de paraules d’un lloc a un altre.
@@ -146,7 +142,7 @@
 
 
 
-	<h4>La unitat lògic aritmètica (ALU)</h4>
+	<h3>La unitat lògic aritmètica (ALU)</h3>
 
 	<p>
 		La unitat lògic aritmètica (ALU) és un circuit digital que realitza dos tipus d’operacions:
@@ -170,7 +166,7 @@
 	</p>
 
 	<p>
-		De les dos entrades de dades, una està connectada al bus intern de la CPU i l’altra al registre acumulador
+		De les dos entrades de dades, una està connectada al bus intern de la CPU i l’altra al registre Acumulador
 	</p>
 
 	<figure>
@@ -180,24 +176,23 @@
 	<p>
 		Les operacions de l’ALU sempre implica dos nombres, un és el que està el registre Acumulador,
 		l’altre és algun dels altres registres de la CPU (R1, R2..., MDR) que es trasllada a l’ALU via el bus intern.
-		Això ho fa la UC a través dels senyals de control segons la instrucció.
+		Això ho fa la UC a través dels senyals de control segons la instrucció en execució.
 	</p>
 
 	<p>
 		Segons la instrucció, el resultat de l’operació es bolcarà de nou en l’acumulador o es bolcarà en el bus per acabar
 		en algun dels registres interns.
-		En tots dos casos, se sobreescriurà el valor que tenia el registre prèviament amb el nou valor que ve l’ALU.
+		En tots dos casos, se sobreescriurà el valor que tenia el registre prèviament amb el nou valor que ve de l’ALU.
 	</p>
 
 
 
-	<h4>El registre d'estat</h4>
+	<h3>El registre d'estat</h3>
 
 	<p>
-		Associat a l’ALU existix un registre especial anomenat registre d’estat que servix per a anotar com ha sigut l`última
-		operació que ha fet.
-	</p>
-	<p>
+		Associat a l’ALU existix un registre especial anomenat registre d’estat.
+		Cadascun del bits del registre d’estat té un significat propi que, segon el seu valor (0 o 1), indica alguna característica
+		de l’última operació efectuada per l’ALU.
 		Sempre que l’ALU fa alguna operació es modifiquen el bits d'este registre.
 	</p>
 
@@ -206,13 +201,7 @@
 	</figure>
 
 	<p>
-		Cadascun del bits del registre d’estat té un significat propi que, segon el seu valor (0 o 1), indica alguna característica
-		de l’última operació efectuada per l’ALU.
-		Com es habitual treballar sobre estos bits tenen un nom.
-	</p>
-
-	<p>
-		Ens centrarem només en dos d’estos bits:
+		Cadascun d'estos bit tenen un nom. Ens centrarem només en dos d’ells:
 	</p>
 	<ul>
 		<li>
@@ -231,17 +220,6 @@
 		Com vorem, estos bits són de summa importància quan s’executa un programa ja que permeten saber si dos nombres són iguals,
 		diferents o quin és major o menor que l’altre i, en funció d’això, decidir si executar unes instruccions o unes altres.
 	</p>
-
-
-
-
-
-
-
-
-
-
-
 
 </body>
 

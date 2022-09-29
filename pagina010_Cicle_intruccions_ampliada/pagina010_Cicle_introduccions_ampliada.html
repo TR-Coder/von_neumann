@@ -18,7 +18,7 @@
 	<h2>El cicle d'intruccions (versió ampliada)</h2>
 
 	<p>
-		Ara que coneixem les part internes de la CPU podem vore amb més deteniment, els passos que es seguixen durant
+		Ara que coneixem les parts internes de la CPU, podem vore amb més deteniment els passos que se seguixen durant
 		les fases del cicle d'instruccions:
 	</p>
 
@@ -56,14 +56,15 @@
 			Memòria
 			<ol>
 				<li>
-					Al rebre el senyal de lectura captura l'adreça que hi ha en el bus d'adreces i la guarda en el
+					En rebre el senyal de lectura, captura l'adreça que hi ha en el bus d'adreces i la guarda en el
 					MAR (registre adreces de memòria).
 				</li>
 				<li>
 					Busca internament la paraula que està en l’adreça que indica el MAR.
+					Això costa un temps que depen de la latència de la memòria.
 				</li>
 				<li>
-					Quan l'ha trobat, la deixa en el registre MDR (registre dades de memòria).
+					Quan l'ha trobada, la deixa en el registre MDR (registre dades de memòria).
 				</li>
 				<li>
 					Avisa al processador, amb un senyal de control que ja pot recuperar la paraula sol·licitada.
