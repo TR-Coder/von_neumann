@@ -1,5 +1,6 @@
 {
 	"workbench.colorCustomizations": {
 		"tab.activeBorder": "#FFFF00"
-	}
+	},
+	"liveServer.settings.port": 5501
 }

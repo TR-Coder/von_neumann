@@ -224,7 +224,7 @@
 
 	<h3>Comprovar si un nombre està entre un interval</h3>
 	<p>
-		El següent programa comprova si un nombre x està entre altres dos a i b. És a dir si x [a,b].
+		El següent programa comprova si un nombre x està entre altres dos a i b. És a dir si x&#8712;[a,b].
 	</p>
 	<p>
 		Suposarem que:
@@ -235,10 +235,10 @@
 		<li>x en l'adreça 1.002</li>
 	</ul>
 	<p>
-		És com si volguérem verificar si (1.002)  [(1.000), (1.001)]
+		És com si volguérem verificar si (1.002) &#8712; [(1.000), (1.001)]
 	</p>
 	<p>
-		Si està entre els altres dos posarem un 0 en l'adreça 1003, sinó posarem un 1.
+		Si està entre els altres dos posarem un 1 en l'adreça 1003, sinó posarem un 0.
 	</p>
 
 	<p>
@@ -249,7 +249,7 @@
 	</figure>
 
 	<p>
-		Inicialment assumirem que x està entre a i b. Per això, en la línia 5.000 fem un <i>MOVE (1003),#0</i>.
+		Inicialment assumirem que x no està entre a i b. Per això, en la línia 5.000 fem un <i>MOVE (1003),#0</i>.
 		Si després resulta que no és així, ja ho canviarem. En concret, això passa en la línia 5.008 que fa un <i>MOVE (1003),#1</i>.
 	</p>
 	<p>
@@ -323,7 +323,7 @@
 	</figure>
 
 
-	<h3>Compta en llista els nombres que superen un determinat</h3>
+	<h3>Recórrer una llista i comptar quants nombres superen un determinat valor</h3>
 
 	<p>
 		El següent programa recorre una llista de n nombres i compta quants d’ells superen un determinat valor límit.
@@ -388,8 +388,8 @@
 		Ara fem la traça. La farem només de les 3 primeres iteracions del bucle.
 	</p>
 	<p>
-		Suposarem que els valors de les adreces de memòria a verificar són: 1.000←30, 1.001←5 i 1.002←10. <br>
-		El valor límit és 1.002←10
+		Suposarem que els valors de les adreces de memòria a verificar són: 1.000←30, 1.001←5 i 1.002←11. <br>
+		El valor límit és 2.000←10
 	</p>
 
 	<figure>
